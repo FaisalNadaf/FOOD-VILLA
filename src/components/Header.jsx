@@ -16,7 +16,7 @@ const Header = () => {
           key={2}
           className="px-2 text-gray-500 mx-3 boredr border-2 hover:shadow-2xl	 rounded-full hover:border-black"
         >
-          <i className="fa-regular fa-address-card"></i> about
+          <i className="fa-regular fa-address-card"></i> About
         </li>
         <li
           key={3}

@@ -4,7 +4,7 @@ import RestaurantCard from "./RestaurantCard";
 import Carousel from "./Carousel";
 
 const filterCard = (searchText, resturants) => {
-  return resturants.filter((resturant) => resturant.desc.includes(searchText));
+  return resturants.filter((resturant) => resturant.name.includes(searchText));
 };
 const filterTYpe = (type, resturants) => {
   return resturants.filter((resturant) => resturant.type.includes(type));
@@ -13,6 +13,7 @@ const filterTYpe = (type, resturants) => {
 const Body = () => {
   const [searchText, setSearchText] = useState();
   const [resturants, setResturants] = useState(data);
+  // console.log(res);
 
   return (
     <div className="">
