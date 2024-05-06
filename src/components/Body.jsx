@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { data } from "../constant";
 import RestaurantCard from "./RestaurantCard";
 import Carousel from "./Carousel";
+import Shimmerui from "./Shimmerui";
 
 const filterCard = (searchText, resturants) => {
-  return resturants.filter((resturant) => resturant.name.includes(searchText));
+  return resturants.filter((resturant) =>
+    resturant?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
+  );
 };
 const filterTYpe = (type, resturants) => {
   return resturants.filter((resturant) => resturant.type.includes(type));
@@ -13,7 +16,26 @@ const filterTYpe = (type, resturants) => {
 const Body = () => {
   const [searchText, setSearchText] = useState();
   const [resturants, setResturants] = useState(data);
-  // console.log(res);
+  const [filteredResturants, setFilteredResturants] = useState(data);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const parsedData = await data.json();
+    const fetchResturant =
+      parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    // setFilteredResturants(fetchResturant);
+    // setResturants(fetchResturant);
+    console.log(parsedData);
+    console.log(fetchResturant);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  fetchData();
 
   return (
     <div className="">
@@ -31,13 +53,13 @@ const Body = () => {
           className="bg-black text-white rounded-r-full h-10 hover:bg-[#FF3131] hover:shadow-2xl px-6 hover:text-white"
           onClick={() => {
             const res = filterCard(searchText, resturants);
-            setResturants(res);
+            setFilteredResturants(res);
           }}
         >
           <i className="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
-      <Carousel />
+      {/* <Carousel /> */}
       <div className="flex items-center justify-between px-32  mb-2">
         <p className="text-2xl font-bold my-6 ">
           Top restaurant chains in Belgaum
@@ -47,7 +69,7 @@ const Body = () => {
             className="p-2 px-6 bg-[#FF3131] rounded-full mx-1"
             onClick={() => {
               const res = filterTYpe("nonVeg", resturants);
-              setResturants(res);
+              setFilteredResturants(res);
             }}
           >
             non-veg
@@ -56,7 +78,7 @@ const Body = () => {
             className="p-2 px-6 bg-[#0FFF50] rounded-full mx-1"
             onClick={() => {
               const res = filterTYpe("veg", resturants);
-              setResturants(res);
+              setFilteredResturants(res);
             }}
           >
             veg
@@ -64,8 +86,9 @@ const Body = () => {
         </div>
       </div>
       <div className="flex flex-wrap items-center  justify-center ">
-        {resturants.map((d, idx) => {
-          return <RestaurantCard {...d} key={idx} />;
+        {filteredResturants?.map((d, idx) => {
+          let c = d.info ? d.info : d;
+          return <RestaurantCard {...c} key={idx} />;
         })}
       </div>
     </div>
