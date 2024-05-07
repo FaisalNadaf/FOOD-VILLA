@@ -3,10 +3,11 @@ import { data } from "../constant";
 import RestaurantCard from "./RestaurantCard";
 import Carousel from "./Carousel";
 import Shimmerui from "./Shimmerui";
+import { Link } from "react-router-dom";
 
 const filterCard = (searchText, resturants) => {
   return resturants.filter((resturant) =>
-    resturant?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
+    resturant?.info?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
   );
 };
 const filterTYpe = (type, resturants) => {
@@ -15,8 +16,8 @@ const filterTYpe = (type, resturants) => {
 
 const Body = () => {
   const [searchText, setSearchText] = useState();
-  const [resturants, setResturants] = useState(data);
-  const [filteredResturants, setFilteredResturants] = useState(data);
+  const [resturants, setResturants] = useState([]);
+  const [filteredResturants, setFilteredResturants] = useState([]);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -26,20 +27,21 @@ const Body = () => {
     const fetchResturant =
       parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    // setFilteredResturants(fetchResturant);
-    // setResturants(fetchResturant);
-    console.log(parsedData);
-    console.log(fetchResturant);
+    setFilteredResturants(fetchResturant);
+    setResturants(fetchResturant);
+    // console.log(parsedData);
+    // console.log(fetchResturant);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  fetchData();
 
-  return (
+  return filteredResturants?.length == 0 ? (
+    <Shimmerui />
+  ) : (
     <div className="">
-      <div className="w-[100%]  flex flex-wrap items-center justify-center my-4 sticky top-12">
+      <div className="w-[100%]  flex flex-wrap items-center justify-center my-4 sticky top-12 ">
         <input
           type="text"
           value={searchText}
@@ -62,7 +64,7 @@ const Body = () => {
       {/* <Carousel /> */}
       <div className="flex items-center justify-between px-32  mb-2">
         <p className="text-2xl font-bold my-6 ">
-          Top restaurant chains in Belgaum
+          Top Restaurant Chains In Your City
         </p>
         <div>
           <button

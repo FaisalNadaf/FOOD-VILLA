@@ -1,26 +1,51 @@
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Buy from "./components/Buy";
-
 import { data } from "./constant.js";
 import Footer from "./components/Footer";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import AboutUs from "./components/AboutUs.jsx";
+import Cart from "./components/Cart.jsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const d = window.location.pathname;
 const App = () => {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<Body />} />
-        {data.map((_, i) => (
-          <Route key={i} path={`/buy/${i+1}`} element={<Buy id={`${i+1}`} />} />
-        ))}
-      </Routes>
-
+      <Outlet />
       <Footer />
     </>
   );
 };
 
-export default App;
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: "",
+    children: [
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/buy/:id",
+        element: <Buy />,
+      },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RouterProvider router={appRouter} />
+);
