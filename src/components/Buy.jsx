@@ -1,44 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { data } from "../constant";
 import BuyCard from "./BuyCard";
+import { useParams } from "react-router-dom";
 
-const Buy = ({ id }) => {
-  // Destructuring id from props
+const Buy = () => {
+  const { id } = useParams();
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/restaurants/chinese-wok-chikka-lakshmaiah-layout-adugodi-bangalore-" +
+        id
+    );
+    const parsedData = await data.json();
+    // const fetchResturant =
+    // parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    console.log(parsedData);
+    console.log(data);
+  };
 
-  // console.log(id);
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const filteredData = data.filter((card) => card.id === id); // Filtering data
-
-  // console.log(filteredData);
-
-  return (
-    <div className="">
-      {filteredData.map((cardData) => (
-        <BuyCard key={cardData.id} {...cardData} />
-      ))}
-    </div>
-  );
+  return <BuyCard key={id} />;
 };
 
 export default Buy;
-// import React from "react";
-// import { data } from "../constant";
-// import RestaurantCard from "./RestaurantCard";
-
-// const Buy = (id) => {
-//   console.log(id);
-//   const d = (id) => {
-//     return data.filter((card) => card.id.includes(id));
-//   };
-//   const filteredData = d(id);
-//   console.log(filteredData);
-
-//   return (
-//     <div className="">
-//       Buy
-//       <RestaurantCard {...filteredData} />
-//     </div>
-//   );
-// };
-
-// export default Buy;

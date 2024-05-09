@@ -25,12 +25,12 @@ const Body = () => {
     );
     const parsedData = await data.json();
     const fetchResturant =
-      parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      parsedData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
-    setFilteredResturants(fetchResturant);
     setResturants(fetchResturant);
-    // console.log(parsedData);
-    // console.log(fetchResturant);
+    setFilteredResturants(fetchResturant);
+    console.log(parsedData);
+    console.log(fetchResturant);
   };
 
   useEffect(() => {
