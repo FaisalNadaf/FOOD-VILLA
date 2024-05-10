@@ -25,12 +25,10 @@ const Body = () => {
     );
     const parsedData = await data.json();
     const fetchResturant =
-      parsedData?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
     setResturants(fetchResturant);
     setFilteredResturants(fetchResturant);
-    console.log(parsedData);
-    console.log(fetchResturant);
   };
 
   useEffect(() => {
@@ -90,6 +88,7 @@ const Body = () => {
       <div className="flex flex-wrap items-center  justify-center ">
         {filteredResturants?.map((d, idx) => {
           let c = d.info ? d.info : d;
+          // let cta=d?.cta?.link;
           return <RestaurantCard {...c} key={idx} />;
         })}
       </div>

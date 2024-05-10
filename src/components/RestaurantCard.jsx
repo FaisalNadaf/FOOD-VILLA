@@ -9,7 +9,10 @@ const RestaurantCard = ({
   areaName,
   sla,
   type,
+  // cta,
 }) => {
+  // let link = cta;
+  // console.log(link);
   return (
     <div className="h-84 w-1/6 mx-10 mb-8  flex flex-wrap rounded-xl   hover:shadow-xl ">
       <Link to={`/buy/${id}`} className="w-full">
@@ -23,7 +26,7 @@ const RestaurantCard = ({
           <div className="flex items-center justify-between">
             <p className="text-xl font-medium overflow-hidden h-8">{name}</p>
             <p>
-              {type == "veg" ? (
+              {type === "veg" ? (
                 <i className="fa-solid fa-certificate text-[#0FFF50]"></i>
               ) : type == "nonVeg" ? (
                 <i className="fa-solid fa-certificate text-[#FF3131]"></i>

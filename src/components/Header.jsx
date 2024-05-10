@@ -10,30 +10,30 @@ const Header = () => {
         className="h-28 "
       />
       <ul className="flex text-xl font-bold w-[36%] ">
+        <Link to="/">
         <li
           key={3}
           className="px-2 text-gray-500 mx-3 boredr border-2 hover:shadow-2xl	 rounded-full hover:border-black"
         >
-          <Link to="/">
             <i className="fa-regular fa-address-card"></i> home
-          </Link>
         </li>
+          </Link>
+          <Link to="/about">
         <li
           key={2}
           className="px-2 text-gray-500 mx-3 boredr border-2 hover:shadow-2xl	 rounded-full hover:border-black"
         >
-          <Link to="/about">
             <i className="fa-regular fa-address-card"></i> About
-          </Link>
         </li>
+          </Link>
+        <Link to="/cart">
         <li
           key={4}
           className="px-2 text-gray-500 mx-3 boredr border-2 hover:shadow-2xl	 rounded-full hover:border-black"
         >
-          <Link to="/cart">
             <i className="fa-solid fa-cart-plus"></i>Cart
-          </Link>
         </li>
+          </Link>
         <li
           key={1}
           className="px-2 text-gray-500 mx-3 boredr border-2 hover:shadow-2xl	 rounded-full "
@@ -49,7 +49,7 @@ const Header = () => {
               <i className="fa-solid fa-arrow-right-to-bracket"></i>
             </button>
           )}
-        </li>
+          </li>
       </ul>
     </div>
   );
