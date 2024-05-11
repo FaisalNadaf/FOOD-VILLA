@@ -2,6 +2,8 @@ import React from "react";
 
 class Details extends React.Component {
   render() {
+
+ 
     return (
       <>
         <div className="text-4xl">

@@ -1,40 +1,18 @@
-import { useEffect, useState } from "react";
-import { data } from "../constant";
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import Carousel from "./Carousel";
 import Shimmerui from "./Shimmerui";
-import { Link } from "react-router-dom";
+import { filterCard } from "../utils/helper";
+import useGetResturant from "../hooks/useGetResturant";
 
-const filterCard = (searchText, resturants) => {
-  return resturants.filter((resturant) =>
-    resturant?.info?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
-  );
-};
 const filterTYpe = (type, resturants) => {
   return resturants.filter((resturant) => resturant.type.includes(type));
 };
 
 const Body = () => {
   const [searchText, setSearchText] = useState();
-  const [resturants, setResturants] = useState([]);
-  const [filteredResturants, setFilteredResturants] = useState([]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
-    const parsedData = await data.json();
-    const fetchResturant =
-      parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setResturants(fetchResturant);
-    setFilteredResturants(fetchResturant);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+  const filteredResturants = useGetResturant();
+  const resturants = filteredResturants;
   return filteredResturants?.length == 0 ? (
     <Shimmerui />
   ) : (

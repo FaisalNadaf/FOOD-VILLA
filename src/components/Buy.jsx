@@ -36,33 +36,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BuyCard from "./BuyCard";
 import { data } from "../constant";
+import useGetResturant from "../hooks/useGetResturant";
 
 const Buy = () => {
   const { id } = useParams();
-  const [card, setCard] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const parsedData = await response.json();
-      const fetchRestaurants =
-        parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      setCard(fetchRestaurants);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, [id]);
-
+  const card = useGetResturant();
 
   const filteredCard = card.filter((restaurant) => {
     return restaurant?.info?.id === id;
@@ -70,7 +48,13 @@ const Buy = () => {
 
   const dtt = { ...filteredCard[0]?.info };
   return (
-    <>{filteredCard.length > 0 ? <BuyCard key={id} {...dtt}/> : <p>Loading...</p>}</>
+    <>
+      {filteredCard.length > 0 ? (
+        <BuyCard key={id} {...dtt} />
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
   );
 };
 
