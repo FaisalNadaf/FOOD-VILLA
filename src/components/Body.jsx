@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmerui from "./Shimmerui";
 import { filterCard } from "../utils/helper";
@@ -10,14 +10,23 @@ const filterTYpe = (type, resturants) => {
 
 const Body = () => {
   const [searchText, setSearchText] = useState();
+  const [filteredResturants, setFilteredResturants] = useState([]);
 
-  const filteredResturants = useGetResturant();
-  const resturants = filteredResturants;
+  let resturants = useGetResturant();
+
+  const setres = () => {
+    setFilteredResturants(resturants);
+  };
+
+  useEffect(() => {
+    setres();
+  }, []);
+
   return filteredResturants?.length == 0 ? (
     <Shimmerui />
   ) : (
     <div className="">
-      <div className="w-[100%]  flex flex-wrap items-center justify-center my-4 sticky top-12 ">
+      <div className="w-[40%] flex flex-wrap items-center justify-start pl-60 my-4 sticky top-12 ">
         <input
           type="text"
           value={searchText}

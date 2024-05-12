@@ -7,6 +7,7 @@ const RestaurantCard = ({
   avgRatingString,
   cuisines,
   areaName,
+  costForTwo,
   sla,
   type,
   // cta,
@@ -43,6 +44,7 @@ const RestaurantCard = ({
             </span>
           </p>
           <p className="text-gray-500 overflow-hidden h-6">{cuisines}</p>
+          <p className="text-gray-500 overflow-hidden h-6">{costForTwo}aaaa</p>
           <p className="text-gray-500 overflow-hidden">{areaName}</p>
         </div>
       </Link>

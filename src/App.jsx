@@ -4,12 +4,15 @@ import Buy from "./components/Buy";
 import { data } from "./constant.js";
 import Footer from "./components/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import AboutUs from "./components/AboutUs.jsx";
+// import AboutUs from "./components/AboutUs.jsx";
 import Cart from "./components/Cart.jsx";
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
+// import Offers from "./components/Offers.jsx";
 
-const d = window.location.pathname;
+const Offers = lazy(() => import("./components/Offers.jsx")); //this is called as lazy loding
+const AboutUs = lazy(() => import("./components/AboutUs.jsx")); //this is called as lazy loding
+
 const App = () => {
   return (
     <>
@@ -28,7 +31,11 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/about",
-        element: <AboutUs />,
+        element: (
+          <Suspense>
+            <AboutUs />
+          </Suspense>
+        ),
       },
       {
         path: "/",
@@ -41,6 +48,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/buy/:id",
         element: <Buy />,
+      },
+      {
+        path: "/offers",
+        element: (
+          <Suspense>
+            <Offers />
+          </Suspense>
+        ),
       },
     ],
   },

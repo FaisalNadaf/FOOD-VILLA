@@ -31,10 +31,10 @@ class AboutUs extends React.Component {
   render() {
     return (
       <div className="h-96	 flex flex-wrap items-center justify-center">
-        <div className="flex justify-end px-6">
-          <img src={this.state.pic} alt="" className="h-1/2	w-1/2 " />
+        <div className="flex justify-end px-6 w-[20%]"> 
+          <img src={this.state.pic} alt="" className="h-1/2	w-96 " />
         </div>
-        <div className="w-1/2 text-4xl font-bold">
+        <div className="w-1/4 text-4xl font-bold">
           <p className="my-2">{this.state.text1}</p>
           <p>{this.state.text2}</p>
           <button

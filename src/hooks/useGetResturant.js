@@ -11,6 +11,7 @@ const useGetResturant = () => {
       parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
     setResturants(fetchResturant);
+    console.log(fetchResturant);
   };
 
   useEffect(() => {
