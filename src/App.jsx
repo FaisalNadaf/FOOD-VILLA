@@ -14,6 +14,7 @@ const Offers = lazy(() => import("./components/Offers.jsx")); //this is called a
 const AboutUs = lazy(() => import("./components/AboutUs.jsx")); //this is called as lazy loding
 
 const App = () => {
+  
   return (
     <>
       <Header />

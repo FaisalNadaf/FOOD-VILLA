@@ -145,3 +145,29 @@ export const data = [
     areaName: "nehru nagar",
   },
 ];
+export  const offers = [
+    {
+      title: "50% off on Pizzas",
+      description: "Get 50% off on all pizzas. Limited time offer!",
+      validUntil: "2024-05-31",
+      discount: 50,
+    },
+    {
+      title: "Free Delivery",
+      description: "Enjoy free delivery on all orders above $30.",
+      validUntil: "2024-06-15",
+      discount: 0,
+    },
+    {
+      title: "Instant Delivery",
+      description: "Enjoy Instant delivery on all orders above $50.",
+      validUntil: "2024-06-15",
+      discount: 0,
+    },
+    {
+      title: "Free Delivery",
+      description: "Enjoy free delivery on all orders above $30.",
+      validUntil: "2024-06-15",
+      discount: 0,
+    },
+  ];
