@@ -6,20 +6,26 @@ import Footer from "./components/Footer";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 // import AboutUs from "./components/AboutUs.jsx";
 import Cart from "./components/Cart.jsx";
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, createContext, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
+import UserContext from "./hooks/UserContext.js";
 // import Offers from "./components/Offers.jsx";
 
 const Offers = lazy(() => import("./components/Offers.jsx")); //this is called as lazy loding
 const AboutUs = lazy(() => import("./components/AboutUs.jsx")); //this is called as lazy loding
 
 const App = () => {
-  
+  const [user, setUser] = useState({
+    name: "demo",
+    email: "demo.com",
+  });
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </>
   );
 };
