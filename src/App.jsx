@@ -19,7 +19,7 @@ const App = () => {
     name: "demo",
     email: "demo.com",
   });
-  return (
+  return ( 
     <>
       <UserContext.Provider value={{ user: user, setUser: setUser }}>
         <Header />

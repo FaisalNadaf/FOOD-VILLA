@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Details from "./Details";
 import UserContext from "../hooks/UserContext";
+// import { Outlet } from "react-router-dom";
 
 const Cart = () => {
   const obj = {
@@ -27,6 +28,7 @@ const Cart = () => {
         }}
       />
       <Details {...obj} />
+      {/* <Outlet /> */}
     </div>
   );
 };
