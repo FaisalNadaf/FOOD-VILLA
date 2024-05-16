@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmerui from "./Shimmerui";
 import { filterCard } from "../utils/helper";
 import useGetResturant from "../hooks/useGetResturant";
+import { FETCH_RESTURANT } from "../constant";
 
 const filterTYpe = (type, resturants) => {
   return resturants.filter((resturant) => resturant.type.includes(type));
@@ -11,15 +12,21 @@ const filterTYpe = (type, resturants) => {
 const Body = () => {
   const [searchText, setSearchText] = useState();
   const [filteredResturants, setFilteredResturants] = useState([]);
+  const [resturants, setResturants] = useState([]);
 
-  let resturants = useGetResturant();
-
-  const setres = () => {
-    setFilteredResturants(resturants);
+  const fetchData = async () => {
+    const data = await fetch(FETCH_RESTURANT);
+    const parsedData = await data.json();
+    const fetchResturant =
+      parsedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    setResturants(fetchResturant);
+    setFilteredResturants(fetchResturant);
+    console.log(fetchResturant);
   };
 
   useEffect(() => {
-    setres();
+    fetchData();
   }, []);
 
   return filteredResturants?.length == 0 ? (

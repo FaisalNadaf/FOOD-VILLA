@@ -9,6 +9,8 @@ import Cart from "./components/Cart.jsx";
 import React, { Suspense, createContext, lazy, useState } from "react";
 import ReactDOM from "react-dom/client";
 import UserContext from "./hooks/UserContext.js";
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
 // import Offers from "./components/Offers.jsx";
 
 const Offers = lazy(() => import("./components/Offers.jsx")); //this is called as lazy loding
@@ -19,13 +21,15 @@ const App = () => {
     name: "demo",
     email: "demo.com",
   });
-  return ( 
+  return (
     <>
-      <UserContext.Provider value={{ user: user, setUser: setUser }}>
-        <Header />
-        <Outlet />
-        <Footer />
-      </UserContext.Provider>
+      <Provider store={store}>
+        <UserContext.Provider value={{ user: user, setUser: setUser }}>
+          <Header />
+          <Outlet />
+          <Footer />
+        </UserContext.Provider>
+      </Provider>
     </>
   );
 };

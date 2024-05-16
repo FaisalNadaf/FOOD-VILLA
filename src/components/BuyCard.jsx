@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem } from "../redux/Slice's/cartSlice";
 
 const BuyCard = ({
   id,
@@ -10,6 +12,7 @@ const BuyCard = ({
   sla,
   type,
 }) => {
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center justify-center">
       <div className="min-h-96 w-[80%] shadow flex">
@@ -24,11 +27,13 @@ const BuyCard = ({
             <div className="flex items-center justify-between ">
               <p className="text-4xl font-bold my-2">{name}</p>
               <p className="text-2xl">
-                { type == "veg" ? (
+                {type == "veg" ? (
                   <i className="fa-solid fa-certificate text-[#0FFF50]"></i>
                 ) : type == "nonVeg" ? (
                   <i className="fa-solid fa-certificate text-[#FF3131]"></i>
-                ):(" ") }
+                ) : (
+                  " "
+                )}
               </p>{" "}
             </div>
             <p>
@@ -42,6 +47,33 @@ const BuyCard = ({
               {cuisines}
             </p>
             <p className="text-gray-500 my-2 overflow-hidden">{areaName}</p>
+            <button
+              className="bg-green-200 hover:bg-green-300 px-4 py-1 rounded-full mt-4 mx-2"
+              onClick={() => {
+                dispatch(
+                  addItem({
+                    id,
+                    name,
+                    cloudinaryImageId,
+                    avgRatingString,
+                    cuisines,
+                    areaName,
+                    sla,
+                    type,
+                  })
+                );
+              }}
+            >
+              Add
+            </button>
+            <button
+              className="bg-red-200 hover:bg-red-300 px-4 py-1 rounded-full mt-4 mx-2"
+              onClick={() => {
+                dispatch(removeItem());
+              }}
+            >
+              Remove
+            </button>
           </div>
         </div>
       </div>

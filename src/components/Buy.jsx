@@ -50,7 +50,7 @@ const Buy = () => {
   return (
     <>
       {filteredCard.length > 0 ? (
-        <BuyCard key={id} {...dtt} />
+        <BuyCard key={id} {...dtt} data={dtt} />
       ) : (
         <p>Loading...</p>
       )}

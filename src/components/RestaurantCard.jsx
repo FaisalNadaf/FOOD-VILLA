@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addItem } from "../redux/Slice's/cartSlice";
 
 const RestaurantCard = ({
   id,
@@ -44,8 +46,9 @@ const RestaurantCard = ({
             </span>
           </p>
           <p className="text-gray-500 overflow-hidden h-6">{cuisines}</p>
-          <p className="text-gray-500 overflow-hidden h-6">{costForTwo}aaaa</p>
+          <p className="text-gray-500 overflow-hidden h-6">{costForTwo}</p>
           <p className="text-gray-500 overflow-hidden">{areaName}</p>
+       
         </div>
       </Link>
     </div>
