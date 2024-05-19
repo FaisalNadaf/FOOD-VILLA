@@ -18,12 +18,13 @@ const Header = () => {
       <img
         src="https://lh3.googleusercontent.com/Em7AHf7XBH_RtGfCBVXz9RH8SM_pHkj3xPP-yd3cRguY1_Jc8fmqgx6WxnvGVyPV5xs5gL3HCD0FCuv6Xo4CwoY6ak4=w256-rw"
         className="h-28 "
+        data-testid="logo"
       />
       <p>
         {user.name}-{user.email}
       </p>
       <ul className="flex text-xl font-bold w-[40%] items-center justify-end">
-        <li key={3} className="	 ">
+        <li key={3} className="	 " data-testid="online-status">
           {IsOnline ? "🟢" : "🔴"}
         </li>
         <Link to="/">
@@ -46,8 +47,9 @@ const Header = () => {
           <li
             key={4}
             className="px-2 text-gray-500 mx-1 boredr border-2 hover:shadow-2xl	 rounded-full hover:border-black"
+            data-testid="cart"
           >
-           Cart-{cartItems.length}
+            Cart-{cartItems.length}
           </li>
         </Link>
         <Link to="/offers">

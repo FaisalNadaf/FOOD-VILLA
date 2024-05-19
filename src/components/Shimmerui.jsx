@@ -3,7 +3,10 @@ import React from "react";
 const Shimmerui = () => {
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center">
+      <div
+        className="flex flex-wrap items-center justify-center"
+        data-testid="shimmer"
+      >
         {Array(12)
           .fill("")
           .map((x, idx) => (

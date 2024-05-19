@@ -36,6 +36,7 @@ const Body = () => {
       <div className="w-[40%] flex flex-wrap items-center justify-start pl-60 my-4 sticky top-12 ">
         <input
           type="text"
+          data-testid="search-input"
           value={searchText}
           placeholder="Search"
           className="border border-black rounded-l-full h-10	px-4 text-lg hover:shadow-2xl"
@@ -44,6 +45,7 @@ const Body = () => {
           }}
         />
         <button
+          data-testid="search-btn"
           className="bg-black text-white rounded-r-full h-10 hover:bg-[#FF3131] hover:shadow-2xl px-6 hover:text-white"
           onClick={() => {
             const res = filterCard(searchText, resturants);
@@ -79,7 +81,10 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-wrap items-center  justify-center ">
+      <div
+        className="flex flex-wrap items-center  justify-center "
+        data-testid="resturant-list"
+      >
         {filteredResturants?.map((d, idx) => {
           let c = d.info ? d.info : d;
           // let cta=d?.cta?.link;
