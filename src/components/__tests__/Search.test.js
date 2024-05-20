@@ -27,5 +27,6 @@ test("search test ", async () => {
   });
 
   const resturantList = body.getByTestId("resturant-list");
-    expect(resturantList.length).tobe(99);
+  console.log(resturantList.children.length);
+  expect(resturantList.children.length).toBe(9);
 });
